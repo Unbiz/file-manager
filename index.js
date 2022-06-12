@@ -36,8 +36,7 @@ rl.addListener('line', async (input) => {
 
       case 'os':
         checkArgsCount(inputArgsArr, 1);
-        const arg = inputArgsArr[1];
-        await getOsInfo(arg);
+        await getOsInfo(inputArgsArr[1]);
         break;
 
       case 'ls':
@@ -52,68 +51,53 @@ rl.addListener('line', async (input) => {
 
       case 'cd':
         checkArgsCount(inputArgsArr, 1);
-        const pathArg = inputArgsArr[1];
-        workingDir = await changeFolder(workingDir, pathArg);
+        workingDir = await changeFolder(workingDir, inputArgsArr[1]);
         break;
 
       case 'add':
         checkArgsCount(inputArgsArr, 1);
-        const filename = inputArgsArr[1];
-        await addNewFile(workingDir, filename);
+        await addNewFile(workingDir, inputArgsArr[1]);
         break;
 
       case 'cat':
         checkArgsCount(inputArgsArr, 1);
-        const openFilename = inputArgsArr[1];
-        await printFileContent(workingDir, openFilename);
+        await printFileContent(workingDir, inputArgsArr[1]);
         break;
 
       case 'rn':
         checkArgsCount(inputArgsArr, 2);
-        const pathToFile = inputArgsArr[1];
-        const newFilename = inputArgsArr[2];
-        await renameFile(workingDir, pathToFile, newFilename);
+        await renameFile(workingDir, inputArgsArr[1], inputArgsArr[2]);
         break;
 
       case 'cp':
         checkArgsCount(inputArgsArr, 2);
-        const pathToCopyingFile = inputArgsArr[1];
-        const pathToNewDirectory = inputArgsArr[2];
-        await copyFile(workingDir, pathToCopyingFile, pathToNewDirectory);
+        await copyFile(workingDir, inputArgsArr[1], inputArgsArr[2]);
         break;
 
       case 'rm':
         checkArgsCount(inputArgsArr, 1);
-        const pathToDeletingFile = inputArgsArr[1];
-        await deleteFile(workingDir, pathToDeletingFile);
+        await deleteFile(workingDir, inputArgsArr[1]);
         break;
 
       case 'mv':
         checkArgsCount(inputArgsArr, 2);
-        const pathToMovingFile = inputArgsArr[1];
-        const pathToDestDirectory = inputArgsArr[2];
-        await copyFile(workingDir, pathToMovingFile, pathToDestDirectory);
-        await deleteFile(workingDir, pathToMovingFile);
+        await copyFile(workingDir, inputArgsArr[1], inputArgsArr[2]);
+        await deleteFile(workingDir, inputArgsArr[1]);
         break;
 
       case 'hash':
         checkArgsCount(inputArgsArr, 1);
-        const pathToHashingFile = inputArgsArr[1];
-        await getHash(workingDir, pathToHashingFile);
+        await getHash(workingDir, inputArgsArr[1]);
         break;
 
       case 'compress':
         checkArgsCount(inputArgsArr, 2);
-        const pathToCompressingFile = inputArgsArr[1];
-        const pathToArchive = inputArgsArr[2];
-        await compressFile(workingDir, pathToCompressingFile, pathToArchive);
+        await compressFile(workingDir, inputArgsArr[1], inputArgsArr[2]);
         break;
 
       case 'decompress':
         checkArgsCount(inputArgsArr, 2);
-        const pathToCompressedFile = inputArgsArr[1];
-        const pathToDecompressedFile = inputArgsArr[2];
-        await decompressFile(workingDir, pathToCompressedFile, pathToDecompressedFile);
+        await decompressFile(workingDir, inputArgsArr[1], inputArgsArr[2]);
         break;
 
       default:
