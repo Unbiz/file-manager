@@ -1,6 +1,8 @@
 import zlib from 'zlib';
 import fsProm from 'fs/promises';
 import path from 'path';
+import util from 'util';
+import stream from 'stream';
 
 const compressFile = async (workingDir, pathToCompressingFile, pathToArchive) => {
   const filePath = path.resolve(workingDir, pathToCompressingFile);
@@ -12,7 +14,10 @@ const compressFile = async (workingDir, pathToCompressingFile, pathToArchive) =>
   const gzip = zlib.createBrotliCompress();
   const destination = compressFile.createWriteStream();
 
-  readable.pipe(gzip).pipe(destination);
+  const pipeline = util.promisify(stream.pipeline);
+  await pipeline(readable, gzip, destination);
+
+  console.log(`Compressed ${filePath} to ${compressFilePath}`);
 };
 
 export default compressFile;
