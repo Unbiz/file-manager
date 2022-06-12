@@ -36,11 +36,11 @@ rl.addListener('line', async (input) => {
 
       case 'os':
         const arg = inputArgsArr[1];
-        getOsInfo(arg);
+        await getOsInfo(arg);
         break;
 
       case 'ls':
-        getFolderLIst(workingDir);
+        await getFolderLIst(workingDir);
         break;
 
       case 'up':
@@ -108,7 +108,7 @@ rl.addListener('line', async (input) => {
         break;
     }
 
-    console.log(`\nYou are currently in, ${workingDir}`);
+    console.log(`You are currently in, ${workingDir}`);
   } catch (error) {
     console.log(`Operation failed: ${error.message}`);
   }

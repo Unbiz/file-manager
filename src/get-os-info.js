@@ -1,6 +1,6 @@
 import os from 'os';
 
-const getOsInfo = (arg) => {
+const getOsInfo = async (arg) => {
   let message = '';
 
   switch (arg) {
