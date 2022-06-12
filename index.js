@@ -35,51 +35,61 @@ rl.addListener('line', async (input) => {
         break;
 
       case 'os':
+        checkArgsCount(inputArgsArr, 1);
         const arg = inputArgsArr[1];
         await getOsInfo(arg);
         break;
 
       case 'ls':
+        checkArgsCount(inputArgsArr, 0);
         await getFolderLIst(workingDir);
         break;
 
       case 'up':
+        checkArgsCount(inputArgsArr, 0);
         workingDir = await changeFolder(workingDir, '..');
         break;
 
       case 'cd':
+        checkArgsCount(inputArgsArr, 1);
         const pathArg = inputArgsArr[1];
         workingDir = await changeFolder(workingDir, pathArg);
         break;
 
       case 'add':
+        checkArgsCount(inputArgsArr, 1);
         const filename = inputArgsArr[1];
         await addNewFile(workingDir, filename);
         break;
 
       case 'cat':
+        checkArgsCount(inputArgsArr, 1);
         const openFilename = inputArgsArr[1];
         await printFileContent(workingDir, openFilename);
         break;
 
       case 'rn':
+        checkArgsCount(inputArgsArr, 2);
         const pathToFile = inputArgsArr[1];
         const newFilename = inputArgsArr[2];
         await renameFile(workingDir, pathToFile, newFilename);
         break;
 
       case 'cp':
+        checkArgsCount(inputArgsArr, 2);
         const pathToCopyingFile = inputArgsArr[1];
         const pathToNewDirectory = inputArgsArr[2];
         await copyFile(workingDir, pathToCopyingFile, pathToNewDirectory);
         break;
 
       case 'rm':
+        checkArgsCount(inputArgsArr, 1);
         const pathToDeletingFile = inputArgsArr[1];
         await deleteFile(workingDir, pathToDeletingFile);
         break;
 
       case 'mv':
+        checkArgsCount(inputArgsArr, 2);
         const pathToMovingFile = inputArgsArr[1];
         const pathToDestDirectory = inputArgsArr[2];
         await copyFile(workingDir, pathToMovingFile, pathToDestDirectory);
@@ -87,17 +97,20 @@ rl.addListener('line', async (input) => {
         break;
 
       case 'hash':
+        checkArgsCount(inputArgsArr, 1);
         const pathToHashingFile = inputArgsArr[1];
         await getHash(workingDir, pathToHashingFile);
         break;
 
       case 'compress':
+        checkArgsCount(inputArgsArr, 2);
         const pathToCompressingFile = inputArgsArr[1];
         const pathToArchive = inputArgsArr[2];
         await compressFile(workingDir, pathToCompressingFile, pathToArchive);
         break;
 
       case 'decompress':
+        checkArgsCount(inputArgsArr, 2);
         const pathToCompressedFile = inputArgsArr[1];
         const pathToDecompressedFile = inputArgsArr[2];
         await decompressFile(workingDir, pathToCompressedFile, pathToDecompressedFile);
@@ -117,4 +130,11 @@ rl.addListener('line', async (input) => {
 function exitProgram() {
   rl.write(`Thank you for using File Manager, ${userName}!`);
   process.exit(0);
+}
+
+function checkArgsCount(inputArgsArr, needCount) {
+  if (inputArgsArr.length !== needCount + 1) {
+    const errorMessage = `Invalid input. Expected ${needCount} arguments, but got ${inputArgsArr.length - 1}`;
+    throw new Error(errorMessage);
+  }
 }
