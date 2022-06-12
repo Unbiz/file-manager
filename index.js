@@ -20,8 +20,8 @@ const input = process.stdin;
 const output = process.stdout;
 const rl = readline.createInterface({ input, output });
 
-rl.write(`Welcome to the File Manager, ${userName}!\n`);
-rl.write(`You are currently in, ${workingDir}\n\n`);
+rl.write(`Welcome to the File Manager, ${userName}!${os.EOL}`);
+rl.write(`You are currently in: ${workingDir}${os.EOL}`);
 
 rl.addListener('close', exitProgram);
 

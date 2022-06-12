@@ -35,12 +35,12 @@ const getOsInfo = async (arg) => {
 const getCpusInfo = () => {
   const cpuArr = os.cpus();
   const cpuLength = cpuArr.length;
-  let infoMessage = `Amount of CPUS: ${cpuLength}\n`;
+  let infoMessage = `Amount of CPUS: ${cpuLength}${os.EOL}`;
 
   cpuArr.forEach((cpu, i) => {
     const cpuModel = cpu.model.trim();
     const cpuRateInGhz = cpu.speed / 1000;
-    infoMessage += `${i + 1}) Model: ${cpuModel}, Clock rate: ${cpuRateInGhz} GHz\n`;
+    infoMessage += `${i + 1}) Model: ${cpuModel}, Clock rate: ${cpuRateInGhz} GHz${os.EOL}`;
   });
 
   return infoMessage;
