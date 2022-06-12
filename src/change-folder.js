@@ -4,8 +4,12 @@ import { constants } from 'node:fs';
 
 const changeFolder = async (workingDir, pathArg) => {
   const newWorkingDir = path.resolve(workingDir, pathArg);
-  await fsProm.access(newWorkingDir, constants.F_OK);
-  return newWorkingDir;
+  const statDir = await fsProm.lstat(newWorkingDir);
+  if (statDir.isDirectory()) {
+    return newWorkingDir;
+  } else {
+    throw new Error('Not a directory');
+  }
 };
 
 export default changeFolder;
