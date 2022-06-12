@@ -1,4 +1,4 @@
-const getHelp = () => {
+const getHelp = async () => {
   console.log(`
     Navigation & working directory:
       up: go upper from current directory (when you are in the root folder this operation shouldn't change working directory)

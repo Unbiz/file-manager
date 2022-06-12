@@ -119,7 +119,7 @@ rl.addListener('line', async (input) => {
 });
 
 function exitProgram() {
-  rl.write(`Thank you for using File Manager, ${userName}!`);
+  console.log(`${os.EOL}Thank you for using File Manager, ${userName}!`);
   process.exit(0);
 }
 

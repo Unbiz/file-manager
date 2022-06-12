@@ -15,11 +15,14 @@ const getFolderLIst = async (path) => {
     }
   });
 
-  let message = '';
+  let message = os.EOL;
 
-  if (!foldersList && !filesList) message = `Directory is empty${os.EOL}`;
-  if (foldersList) message += `Folders:${os.EOL}${foldersList.join(', ')}${os.EOL}`;
-  if (filesList) message += `Files:${os.EOL}${filesList.join(', ')}${os.EOL}`;
+  if (list.length === 0) {
+    message += `Directory is empty${os.EOL}`
+  } else {
+    if (foldersList) message += `Folders:${os.EOL}${foldersList.join(', ')}${os.EOL}`;
+    if (filesList) message += `Files:${os.EOL}${filesList.join(', ')}${os.EOL}`;
+  }
 
   console.log(message);
 };
