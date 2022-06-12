@@ -9,7 +9,7 @@ const compressFile = async (workingDir, pathToCompressingFile, pathToArchive) =>
   const compressFileName = path.basename(filePath) + '.br';
   const compressFilePath = path.resolve(workingDir, pathToArchive, compressFileName);
   const file = await fsProm.open(filePath, 'r');
-  const compressFile = await fsProm.open(compressFilePath, 'w');
+  const compressFile = await fsProm.open(compressFilePath, 'wx');
   const readable = file.createReadStream();
   const gzip = zlib.createBrotliCompress();
   const destination = compressFile.createWriteStream();

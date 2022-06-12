@@ -15,7 +15,7 @@ const decompressFile = async (workingDir, pathToCompressedFile, pathToFile) => {
   }
 
   const filePath = path.resolve(workingDir, destFolder, compressFileName);
-  const file = await fsProm.open(filePath, 'w');
+  const file = await fsProm.open(filePath, 'wx');
   const compressFile = await fsProm.open(compressFilePath, 'r');
   const readable = compressFile.createReadStream();
   const gzip = zlib.createBrotliDecompress();
