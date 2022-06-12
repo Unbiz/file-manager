@@ -13,6 +13,7 @@ import deleteFile from './src/delete-file.js';
 import getHash from './src/get-hash.js';
 import compressFile from './src/compress-file.js';
 import decompressFile from './src/decompress-file.js';
+import getHelp from './src/get-help.js';
 
 let workingDir = os.homedir();
 const userName = getUserName();
@@ -21,6 +22,7 @@ const output = process.stdout;
 const rl = readline.createInterface({ input, output });
 
 rl.write(`Welcome to the File Manager, ${userName}!${os.EOL}`);
+rl.write(`Print "help" to get list of commands${os.EOL}`);
 rl.write(`You are currently in: ${workingDir}${os.EOL}`);
 
 rl.addListener('close', exitProgram);
@@ -32,6 +34,11 @@ rl.addListener('line', async (input) => {
     switch (command) {
       case '.exit':
         exitProgram();
+        break;
+
+      case 'help':
+        checkArgsCount(inputArgsArr, 0);
+        await getHelp();
         break;
 
       case 'os':
